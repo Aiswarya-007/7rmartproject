@@ -1,0 +1,18 @@
+<suite name="group run">
+	<listeners>
+		<listener class-name="listeners.ExtentReporter"></listener>
+	</listeners>
+	<test name="running in sanity regression">
+		<groups>
+			<run>
+				<include name="smoke"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="testScripts.AdminUserTest">
+			</class>
+			<class name="testScripts.Logintest">
+			</class>
+		</classes>
+	</test>
+</suite>

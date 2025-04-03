@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [crossbrowser]">
+  <listeners>
+    <listener class-name="listeners.ExtentReporter"/>
+  </listeners>
+  <test thread-count="2" parallel="tests" name="running in firefox(failed)">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="testScripts.AdminUserTest">
+        <methods>
+          <include name="verifyNewButtonColor"/>
+          <include name="launchBrowser"/>
+          <include name="launchBrowser"/>
+          <include name="verifyWhetherUserIsAbleToClickonStatusButton"/>
+          <include name="terminateSession"/>
+        </methods>
+      </class> <!-- testScripts.AdminUserTest -->
+    </classes>
+  </test> <!-- running in firefox(failed) -->
+</suite> <!-- Failed suite [crossbrowser] -->
