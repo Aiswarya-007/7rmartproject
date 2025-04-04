@@ -59,9 +59,9 @@ public class AdminUserTest extends Baseclass {
 	public void verifyWhetherAdminisAbleToAddNewUser() {
 		loginpage = new Loginpage(driver);
 		homepage = loginpage.login();
-		adminuserpage = homepage.navigateToadminUsers(); // object chaining(mandatory)
+		adminuserpage = homepage.navigateToadminUsers(); 
 		adminuserpage.clickOnNewButton().enterUsernameField("Aishu").enterPasswordField("aishu123")
-				.selectUserType("Staff").clickOnSaveButton(); // method chaining(optional)
+				.selectUserType("Staff").clickOnSaveButton(); 
 	}
 
 	@Test(dataProvider = "userData", dataProviderClass = DataProviders.class)
