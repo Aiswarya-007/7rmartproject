@@ -7,7 +7,7 @@
         <methods>
           <include name="launchBrowser"/>
           <include name="launchBrowser"/>
-          <include name="verifyWhetherAdminisAbletoAddUsers" invocation-numbers="0 1 2"/>
+          <include name="verifyWhetherAdminisAbleToAddNewUser"/>
           <include name="terminateSession"/>
         </methods>
       </class> <!-- testScripts.AdminUserTest -->

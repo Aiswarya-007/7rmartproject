@@ -38,6 +38,8 @@ public class AdminUserPage
 	private WebElement newresetbutton;
 	@FindBy(xpath="(//a[@href='https://groceryapp.uniqassosiates.com/admin/user/status?id=13198&st=inactive&page_ad=1'])[2]")
 	private WebElement status;
+	@FindBy(xpath="(//a[@class='btn btn-sm btn btn-primary btncss'])[1]")
+	private WebElement edit;
 	
 	public AdminUserPage(WebDriver driver)
 	{
@@ -68,6 +70,14 @@ public class AdminUserPage
 		password.sendKeys(passWord);
 		return this;
 	}
+	public void addNewUser(String userName,String passWord,String userType)
+	{
+		clickOnNewButton();
+		enterUsernameField(userName);
+		enterPasswordField(passWord);
+		selectUserType(userType);
+		clickOnSaveButton();
+	}
 	public AdminUserPage selectUserType(String userType)
 	{
 		PageUtility pageutility=new PageUtility(driver);
@@ -89,6 +99,11 @@ public class AdminUserPage
 	public void clickOnNewFormResetButton()
 	{
 		newresetbutton.click();
+		edit.click();
+	}
+	public void ClickOnEditButton()
+	{
+		edit.click();
 	}
 	public void clickSearchButton()
 	{

@@ -10,6 +10,7 @@ import pages.AdminUserPage;
 import pages.HomePage;
 import pages.Loginpage;
 import utilities.ExcelReader;
+import utilities.GeneralUtility;
 
 public class AdminUserTest extends Baseclass {
 	AdminUserPage adminuserpage;
@@ -62,33 +63,44 @@ public class AdminUserTest extends Baseclass {
 		adminuserpage = homepage.navigateToadminUsers(); 
 		adminuserpage.clickOnNewButton().enterUsernameField("Aishu").enterPasswordField("aishu123")
 				.selectUserType("Staff").clickOnSaveButton(); 
+		String actualalertmessage = adminuserpage.getAlertMessage();
+		Assert.assertEquals(actualalertmessage, "User Created Successfully","Username already exists");
 	}
-
-	@Test(dataProvider = "userData", dataProviderClass = DataProviders.class)
-	public void verifyWhetherAdminisAbletoAddUsers(String userName, String passWord, String userType) {
+	
+	@Test
+	public void verifywhetherAdminisAbletoAddSingleUser()
+	{
 		adminuserpage = new AdminUserPage(driver);
 		homepage = new HomePage(driver);
 		loginpage = new Loginpage(driver);
 		loginpage.login();
 		homepage.navigateToadminUsers();
-		adminuserpage.clickOnNewButton();
-		adminuserpage.enterUsernameField(userName);
-		adminuserpage.enterPasswordField(passWord);
-		adminuserpage.selectUserType(userType);
-		adminuserpage.clickOnSaveButton();
+		String randomname=GeneralUtility.getRandomName(); 
+		adminuserpage.addNewUser(randomname+"LN", randomname+"@123", "Staff");
 		String actualalertmessage = adminuserpage.getAlertMessage();
 		Assert.assertEquals(actualalertmessage, "User Created Successfully","Username already exists");
 	}
 
-	@Test
-	public void verifyWhetherAdminisAbleToResetAdminUsersInformation() {
+	@Test(dataProvider = "userData", dataProviderClass = DataProviders.class)
+	public void verifyWhetherAdminisAbletoAddMultipleUsers(String userName, String passWord, String userType) {
 		adminuserpage = new AdminUserPage(driver);
 		homepage = new HomePage(driver);
 		loginpage = new Loginpage(driver);
 		loginpage.login();
 		homepage.navigateToadminUsers();
-		adminuserpage.clickOnNewButton();
-		adminuserpage.clickOnNewFormResetButton();
+		adminuserpage.addNewUser(userName+"cooper", passWord+userName, userType);
+		String actualalertmessage = adminuserpage.getAlertMessage();
+		Assert.assertEquals(actualalertmessage, "Users Created Successfully","Username already exists");
+	}
+
+	@Test
+	public void verifyWhetherAdminisAbleToResetUsersInformation() {
+		adminuserpage = new AdminUserPage(driver);
+		homepage = new HomePage(driver);
+		loginpage = new Loginpage(driver);
+		loginpage.login();
+		homepage.navigateToadminUsers();
+		adminuserpage.ClickOnEditButton();
 	}
 
 	@Test
